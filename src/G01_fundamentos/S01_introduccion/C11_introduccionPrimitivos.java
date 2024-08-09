@@ -6,9 +6,7 @@ package G01_fundamentos.S01_introduccion;
 * - Cada tipo de datos posee una clase wrapper: Boolean, Character, Byte, Short, Integer, Long, Float y Double
 * */
 
-import java.sql.SQLOutput;
-
-public class C08_introduccionPrimitivos {
+public class C11_introduccionPrimitivos {
     public static void main(String[] args) {
 
         /* Tipos de datos primitivos */
