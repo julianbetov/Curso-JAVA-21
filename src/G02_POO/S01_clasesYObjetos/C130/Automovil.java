@@ -1,27 +1,57 @@
 package G02_POO.S01_clasesYObjetos.C130;
 
-// Encapsulamiento
+// Sobrecarga de constructores
 /* Notas:
-  - Encapsulamiento: consiste en ocultar los detalles internos de un objeto y controlar el acceso a sus datos
-  mediante métodos públicos. Esto protege la integridad del objeto al evitar modificaciones directas a sus atributos
-  desde fuera de la clase.
-  - Modificadores de acceso: https://javamagician.com/java-modificadores-de-acceso/
+
+Constructores
+    - son métodos especiales que se utilizan para inicializar objetos de una clase. Tienen el mismo nombre que
+    la clase y no tienen un valor de retorno. Un constructor es llamado automáticamente cuando se crea una
+    instancia de la clase y puede ser utilizado para asignar valores iniciales a los atributos.
+
+    Sobrecarga
+    - Es la capacidad de definir múltiples métodos con el mismo nombre dentro de una clase, siempre y cuando tengan
+    diferentes firmas (por tipo, número o ambos). Esto permite crear variantes de un método para manejar distintos
+    tipos o cantidades de datos, mejorando la flexibilidad y legibilidad del código.
+    Recurso: https://javamagician.com/java-sobrecarga-sobrescritura-metodos/
+
  */
 
 public class Automovil {
 
-    // Ocultando los atributos
     private String fabricante;
     private String modelo;
     private String color;
     private double cilindrada;
 
-    /* Nota:
-    - Los metodos tambien pueden ser privados y ser solo accesibles desde la clase en la que se declaran.
-     */
+    // Constructores (Mismo metodo, diferentes firmas)
 
-    // Metodos Getter y Setter (Uno de cada uno para cada atributo privado de la clase)
-    // Funcion: Controlar el acceso seguro a los atributos y la forma en la que se cambian sus valores
+    public Automovil() {
+    }
+
+    public Automovil(String fabricante, String modelo) {
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+    }
+
+    public Automovil(String fabricante, String modelo, String color) {
+
+        this(fabricante, modelo); // Debe ser la primera linea en el constructor que la contiene
+
+        /*
+            this() es una forma de invocar un constructor desde otro constructor dentro de la misma clase.
+            Esta técnica se llama constructor chaining o encadenamiento de constructores. Se utiliza para evitar
+            la duplicación de código y para inicializar objetos de manera más eficiente.
+         */
+
+        this.color = color;
+    }
+
+    public Automovil(String fabricante, String modelo, String color, double cilindrada) {
+        this(fabricante, modelo, color);
+        this.cilindrada = cilindrada;
+    }
+
+    // Metodos Getter y Setter
 
     public String getFabricante() {
         return fabricante;
@@ -29,15 +59,6 @@ public class Automovil {
 
     public void setFabricante(String fabricante) {
         this.fabricante = fabricante;
-
-        /* Operador this:
-        - "Within an instance method or a constructor, 'this' is a reference to the current object — the object whose
-          method or constructor is being called. You can refer to any member of the current object from within an
-          instance method or a constructor by using this."
-        - Es útil cuando hay ambigüedad entre los nombres de variables locales y los atributos de la clase, o para
-          pasar la instancia actual a otro método o constructor. Aquí tienes un ejemplo:
-         */
-
     }
 
     public String getModelo() {
