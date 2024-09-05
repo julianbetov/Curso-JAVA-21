@@ -1,39 +1,31 @@
 package G02_POO.S01_clasesYObjetos.C130;
 
+// Encapsulamiento en Automovil.java
+
 public class EjemploAutomovil {
     public static void main(String[] args) {
 
+        // Instancia de la clase
+        Automovil lamborghini = new Automovil();
+
         /*
-        Crear una instancia del objeto Automovil.
-        - Se hace uso del constructor: Metodo especial para crear e inicializar un objeto creado a partir de una clase.
-            Nota: el constructor lleva el mismo nombre de la clase.
-        - Previo al constructor usamos la palabra reservada 'new'.
+         Nota: No es posible acceder a los atributos de la clase directamente
+             (Con el operador punto)
+             Error:  System.out.println(lamborghini.modelo); // Ya que no se tiene acceso al atributo 'modelo',
+                                                                debido a que el modificador de acceso es 'private'.
          */
-        Automovil auto = new Automovil();
 
-        // Modificando el valor de los atributos del objeto
-        auto.fabricante = "Ferrari";
-        auto.modelo = "Formula 1";
-        auto.color = "Rojo";
-        auto.cilindrada = 1600L;
+        // Cambiar datos por medio de los metodos publicos Get y Set
+        lamborghini.setModelo("Serrato"); // Ambiguo: lamborghini.modelo = "serrato";
+        lamborghini.setColor("Azul");
+        lamborghini.setCilindrada(1600L);
+        lamborghini.setFabricante("Lamborghini");
 
-        // Accediendo a los atributos de auto para imprimir sus valores
-        System.out.println("auto.fabricante = " + auto.fabricante);
-        System.out.println("auto.modelo = " + auto.modelo);
-        System.out.println("auto.color = " + auto.color);
-        System.out.println("auto.cilindrada = " + auto.cilindrada);
-
-        // ----------------- SEGUNDO OBJETO -----------------
-
-        Automovil lamborghini = new Automovil(); // Inicializacion
-        lamborghini.fabricante = "Lamborghini"; // Modificando atributos
-        lamborghini.modelo = "Huracan";
-        lamborghini.color = "Azul";
-        lamborghini.cilindrada = 1600L;
-        System.out.println("lamborghini.fabricante = " + lamborghini.fabricante); // Obteniendo atributos
-        System.out.println("lamborghini.modelo = " + lamborghini.modelo);
-        System.out.println("lamborghini.color = " + lamborghini.color);
-        System.out.println("lamborghini.cilindrada = " + lamborghini.cilindrada);
+        // Mostrar en consola los atributos del objeto
+        System.out.println("Modelo: " + lamborghini.getModelo());
+        System.out.println("Color: " + lamborghini.getColor());
+        System.out.println("Cilindrada: " + lamborghini.getCilindrada());
+        System.out.println("Fabricante: " + lamborghini.getFabricante());
 
     }
 }
