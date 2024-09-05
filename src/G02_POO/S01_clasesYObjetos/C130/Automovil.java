@@ -1,20 +1,15 @@
 package G02_POO.S01_clasesYObjetos.C130;
 
-// Sobrecarga de constructores
-/* Notas:
-
-Constructores
-    - son métodos especiales que se utilizan para inicializar objetos de una clase. Tienen el mismo nombre que
-    la clase y no tienen un valor de retorno. Un constructor es llamado automáticamente cuando se crea una
-    instancia de la clase y puede ser utilizado para asignar valores iniciales a los atributos.
-
-    Sobrecarga
-    - Es la capacidad de definir múltiples métodos con el mismo nombre dentro de una clase, siempre y cuando tengan
-    diferentes firmas (por tipo, número o ambos). Esto permite crear variantes de un método para manejar distintos
-    tipos o cantidades de datos, mejorando la flexibilidad y legibilidad del código.
-    Recurso: https://javamagician.com/java-sobrecarga-sobrescritura-metodos/
-
+// Metodo equals()
+/* Nota:
+- Todos los objetos en java son unicos y distintos, aunque tenga la misma informacion en sus atributos.
+- El metodo equals
+- java.lang.Object: La clase Object es la raiz de la jerarquia de clases. Cada clase tiene Object como superclase. Todos los objetos,
+                    incluidas las matrices, implementan los metodos de esta clase. => Herencia implicita
+                    Resource: https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html
  */
+
+import java.util.Objects;
 
 public class Automovil {
 
@@ -23,10 +18,7 @@ public class Automovil {
     private String color;
     private double cilindrada;
 
-    // Constructores (Mismo metodo, diferentes firmas)
-
-    public Automovil() {
-    }
+    public Automovil() {}
 
     public Automovil(String fabricante, String modelo) {
         this.fabricante = fabricante;
@@ -34,15 +26,7 @@ public class Automovil {
     }
 
     public Automovil(String fabricante, String modelo, String color) {
-
-        this(fabricante, modelo); // Debe ser la primera linea en el constructor que la contiene
-
-        /*
-            this() es una forma de invocar un constructor desde otro constructor dentro de la misma clase.
-            Esta técnica se llama constructor chaining o encadenamiento de constructores. Se utiliza para evitar
-            la duplicación de código y para inicializar objetos de manera más eficiente.
-         */
-
+        this(fabricante, modelo);
         this.color = color;
     }
 
@@ -50,8 +34,6 @@ public class Automovil {
         this(fabricante, modelo, color);
         this.cilindrada = cilindrada;
     }
-
-    // Metodos Getter y Setter
 
     public String getFabricante() {
         return fabricante;
@@ -83,6 +65,24 @@ public class Automovil {
 
     public void setCilindrada(double cilindrada) {
         this.cilindrada = cilindrada;
+    }
+
+    /*
+        Por defecto, Automovil hereda el metodo 'equals()' de la super clase Object:
+            public boolean equals(Object obj) { return (this == obj); } // Retorna true si y solo si el objeto es el mismo que el del argumento
+                                                                        // No compara los valores unicos de los atributos de los objetos
+
+        Sobrescribiendo el metodo equals de java.lang.Object.
+
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Exactamente el mismo objeto
+        if (o == null || getClass() != o.getClass()) return false; // Validando si el argumento es null o pertenece a una clase distinta que la instancia.
+        Automovil automovil = (Automovil) o; // Casting explicito: Convetir el argumento a un objeto de tipo Automovil | Resource: https://www.arquitecturajava.com/java-casting-y-como-usarlo/
+        // Comparar los valores individuales de la instancia con los del argumento
+        return Double.compare(getCilindrada(), automovil.getCilindrada()) == 0 && Objects.equals(getFabricante(), automovil.getFabricante()) && Objects.equals(getModelo(), automovil.getModelo()) && Objects.equals(getColor(), automovil.getColor());
     }
 
 }
