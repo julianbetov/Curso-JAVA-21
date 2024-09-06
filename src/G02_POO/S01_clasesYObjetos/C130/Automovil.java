@@ -1,12 +1,8 @@
 package G02_POO.S01_clasesYObjetos.C130;
 
-// Metodo equals()
+// Metodo toString()
 /* Nota:
-- Todos los objetos en java son unicos y distintos, aunque tenga la misma informacion en sus atributos.
-- El metodo equals
-- java.lang.Object: La clase Object es la raiz de la jerarquia de clases. Cada clase tiene Object como superclase. Todos los objetos,
-                    incluidas las matrices, implementan los metodos de esta clase. => Herencia implicita
-                    Resource: https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html
+- El metodo 'toString()' se toma por defecto al imprimir el objeto por si solo, no es necesario llamarlo.
  */
 
 import java.util.Objects;
@@ -18,7 +14,8 @@ public class Automovil {
     private String color;
     private double cilindrada;
 
-    public Automovil() {}
+    public Automovil() {
+    }
 
     public Automovil(String fabricante, String modelo) {
         this.fabricante = fabricante;
@@ -67,22 +64,33 @@ public class Automovil {
         this.cilindrada = cilindrada;
     }
 
-    /*
-        Por defecto, Automovil hereda el metodo 'equals()' de la super clase Object:
-            public boolean equals(Object obj) { return (this == obj); } // Retorna true si y solo si el objeto es el mismo que el del argumento
-                                                                        // No compara los valores unicos de los atributos de los objetos
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Automovil automovil = (Automovil) o;
+        return Double.compare(getCilindrada(), automovil.getCilindrada()) == 0 && Objects.equals(getFabricante(), automovil.getFabricante()) && Objects.equals(getModelo(), automovil.getModelo()) && Objects.equals(getColor(), automovil.getColor());
+    }
 
-        Sobrescribiendo el metodo equals de java.lang.Object.
+    /*
+        Tambien se hereda el metodo 'tostring()' de java.lang.Object:
+            public String toString() { return getClass().getName() + "@" + Integer.toHexString(hashCode()); }
+            - Retorna una representacion en String del objeto.
+
+        Sobrescribiendo el metodo para obtener la informacion individual de los atributos de la instancia
 
      */
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true; // Exactamente el mismo objeto
-        if (o == null || getClass() != o.getClass()) return false; // Validando si el argumento es null o pertenece a una clase distinta que la instancia.
-        Automovil automovil = (Automovil) o; // Casting explicito: Convetir el argumento a un objeto de tipo Automovil | Resource: https://www.arquitecturajava.com/java-casting-y-como-usarlo/
-        // Comparar los valores individuales de la instancia con los del argumento
-        return Double.compare(getCilindrada(), automovil.getCilindrada()) == 0 && Objects.equals(getFabricante(), automovil.getFabricante()) && Objects.equals(getModelo(), automovil.getModelo()) && Objects.equals(getColor(), automovil.getColor());
+    public String toString() {
+        return "Automovil{" +
+                "fabricante='" + fabricante + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", color='" + color + '\'' +
+                ", cilindrada=" + cilindrada +
+                '}';
     }
+
+
 
 }
