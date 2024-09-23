@@ -22,8 +22,11 @@ public class FinalMethod {
 
 }
 
+/* // Descomentar.
 class B extends FinalMethod {
     void firstMethod() {
         System.out.println("Illegal");
+        // COMPILE-ERROR! Overriden method is final
     }
 }
+*/
