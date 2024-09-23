@@ -26,6 +26,8 @@ public final class FinalClass {
 
 }
 
+/* -- Descomentar.
 class SecondClass extends FinalClass {
     // COMPILE-ERROR! Can't subclass A
 }
+*/
